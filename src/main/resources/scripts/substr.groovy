@@ -1,23 +1,21 @@
 package scripts
 
-def result="";
-//try{
-    result = doc[field];
-    if(result!=null){
-    	temp = doc[field].value.toString();
-    	if(start.abs()>=temp.length()){
-    		return "";
-    	}
-    	if(end==null) result = temp[start..-1];
-    	else {
-    		if(end.abs()>=temp.length()){
-    			return "";
-    		}
-    		result =temp[start..end];
-    		
-    	}
+def result = null;
+try {
+    str = doc[field].value.toString()
+    if (end != null) {
+        if (start < end) {
+            if (end >= str.length()) {
+                result = str[start..-1];
+            } else {
+                result = str[start..end - 1];
+            }
+        }
+    } else {
+        if (start < str.length()) {
+            result = str[start..-1];
+        }
     }
-//}catch(Throwable t) {
-//}
-
-return result;
+} finally {
+    return result;
+}

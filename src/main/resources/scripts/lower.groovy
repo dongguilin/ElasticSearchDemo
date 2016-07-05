@@ -1,12 +1,8 @@
 package scripts
 
-def result="";
-try{
-    result = doc[field];
-    if(result!=null){
-		result =doc[field].value.toString().toLowerCase();
-    }
-}catch(Throwable t) {
+def result = null;
+try {
+    result = doc[field].value.toString().toLowerCase();
+} finally {
+    return result;
 }
-
-return result;
